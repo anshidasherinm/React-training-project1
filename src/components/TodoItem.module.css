@@ -1,0 +1,51 @@
+.todo {
+  margin: 5px 2px;
+  height: 2rem;
+  width: 80%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  background-color: #a89ee0;
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 3px;
+  color: white;
+  font-weight: bold;
+  /* font-size: large; */
+  box-shadow: 3px 3px #888888;
+}
+input[type="checkbox"] {
+  /* flex: 2; */
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 1rem;
+  background-color: black;
+}
+.title {
+  /* flex: 5; */
+  width: 17rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  /* background-color: green; */
+}
+.remove {
+  /* background-color: aqua; */
+  /* flex: 2; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  margin-left: 10px;
+  /* background-color: burlywood; */
+}
+
+i {
+  color: red;
+  font-size: larger;
+  font-weight: bolder;
+  float: right;
+  padding-right: 10px;
+  cursor: pointer;
+}

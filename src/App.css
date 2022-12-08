@@ -1,0 +1,13 @@
+/* body {
+  height: 100vh;
+  background-image: linear-gradient(to bottom, #ddaddd, #998beb);
+} */
+
+.App {
+  margin: 5rem 2rem;
+}
+
+.App h1 {
+  text-align: center;
+  color: white;
+}
