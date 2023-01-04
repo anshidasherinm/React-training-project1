@@ -13,12 +13,6 @@ const TodoForm = (props) => {
   let notification = useSelector((state) => state.ui.notification);
   let loadingStatus = useSelector((state) => state.ui.loadingStatus);
 
-  // const [todoState, dispatchtodo] = useReducer(todoReducer, initialtodoState);
-
-  const setItemHandler = (event) => {
-    // dispatchtodo({ type: "SET", val: event.target.value });
-  };
-
   const formSubmitHandler = async (event) => {
     event.preventDefault();
 
@@ -50,12 +44,7 @@ const TodoForm = (props) => {
   return (
     <div className={classes.formcontainer}>
       <form className={classes.form} onSubmit={formSubmitHandler}>
-        <input
-          ref={todoRef}
-          type="text"
-          placeholder="new todo item"
-          onChange={setItemHandler}
-        />
+        <input ref={todoRef} type="text" placeholder="new todo item" />
 
         <Button className={classes.button} type="submit" />
       </form>

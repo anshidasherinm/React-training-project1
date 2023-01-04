@@ -21,7 +21,8 @@ const TodosContainer = (props) => {
       dispatch(uiActions.setStatus());
       return;
     }
-    // dispatch(fetchTodoData()); why ths cannot be provided here
+    //   dispatch(fetchTodoData()); // why ths cannot be provided here
+    // }, [dispatch, todos.changed]);
   }, [dispatch]);
 
   const content =

@@ -88,6 +88,7 @@ export const updateTodoData = async (id) => {
         };
       }
     }
+    console.log(toDoDatas);
     if (index === null) {
       throw new Error("Updating todo data failed.");
     }
@@ -119,7 +120,7 @@ export const deleteTodoData = async (id) => {
         index = key;
       }
     }
-
+    console.log(toDoDatas);
     if (index === null) {
       throw new Error("Removing todo data failed.");
     }

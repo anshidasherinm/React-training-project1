@@ -20,10 +20,10 @@ const TodoItem = (props) => {
     if (response === "success") {
       dispatch(todoActions.removeItemFromTodos(props.id));
       dispatch(uiActions.setStatus("Successfully deleted"));
-      dispatch(fetchTodoData());
     } else {
       dispatch(uiActions.setStatus("Deletion failed"));
     }
+    dispatch(fetchTodoData());
   };
 
   const checkboxHandler = async () => {
@@ -34,10 +34,10 @@ const TodoItem = (props) => {
     if (response === "success") {
       dispatch(todoActions.addCheckHandler(props.id));
       dispatch(uiActions.setStatus("Succesfully updated"));
-      dispatch(fetchTodoData());
     } else {
       dispatch(uiActions.setStatus("Updation failed"));
     }
+    dispatch(fetchTodoData());
   };
 
   // //why cant provide here with todos.changed / handlers
