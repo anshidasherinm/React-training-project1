@@ -1,0 +1,59 @@
+.todos {
+  /* background-color: blue; */
+  border: 2px solid gray;
+
+  height: 27rem;
+  display: flex;
+  flex-direction: row;
+  width: 89%;
+  min-width: 500px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 4px 0px;
+}
+
+.new_todos {
+  width: 49%;
+  margin: 0.5rem 0.1rem;
+  padding: 0.2rem;
+  background-color: white;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.completed_todos {
+  width: 46%;
+  margin: 0.5rem 0.1rem;
+  padding: 0.2rem;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+.seperator {
+  margin: 0.5rem 0.1rem;
+  width: 0.5px;
+  background-color: grey;
+  height: 95%;
+  border: 0.5px solid grey;
+}
+
+.error {
+  text-align: center;
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  text-align: center;
+}
