@@ -1,0 +1,23 @@
+.emptylist {
+  display: flex;
+  height: 100%;
+  width: 280px;
+  margin: 0.5rem 0.1rem;
+  padding: 0.2rem;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  /* background-color: aqua; */
+}
+
+.completed_todos {
+  width: 280px;
+  margin: 0.5rem 0.1rem;
+  padding: 0.2rem;
+  background-color: white;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}

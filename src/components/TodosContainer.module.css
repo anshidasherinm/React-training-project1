@@ -1,0 +1,38 @@
+.todos {
+  /* background-color: blue; */
+  border: 2px solid gray;
+  background-color: white;
+  height: 27rem;
+  display: flex;
+  flex-direction: row;
+  width: 83%;
+  min-width: 500px;
+  justify-content: space-evenly;
+  border-radius: 10px;
+  padding: 4px 0px;
+}
+
+.seperator {
+  margin: 0.5rem 0.1rem;
+  width: 0.5px;
+  background-color: grey;
+  height: 95%;
+
+  border: 0.5px solid grey;
+}
+
+.error {
+  text-align: center;
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  text-align: center;
+}

@@ -1,0 +1,20 @@
+.container {
+  height: 240px;
+  width: 310px;
+  background-color: white;
+  overflow-y: auto;
+  margin-left: 1rem;
+  padding-bottom: 1rem;
+  position: relative;
+  /* position: absolute; */
+}
+
+.allBtn {
+  /* background-color: green; */
+  /* padding-right: 2rem; */
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 1rem;
+  width: 100px;
+  /* margin-top: 1rem; */
+}

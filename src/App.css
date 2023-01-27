@@ -1,0 +1,61 @@
+/* body {
+  height: 100vh;
+  background-image: linear-gradient(to bottom, #ddaddd, #998beb);
+} */
+
+.App {
+  /* width: 100%; */
+  /* background-color: indianred; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.App h1 {
+  text-align: center;
+  color: white;
+  width: 500px;
+  position: absolute;
+  top: 3rem;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+}
+
+.main {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 1rem;
+  /* min-width: 600px; */
+  /* background-color: olive; */
+  justify-content: space-between;
+}
+
+.leftWidget {
+  /* width: 20%; */
+  min-width: 350px;
+  /* background-color: aqua; */
+  margin-left: 3rem;
+  margin-top: 4rem;
+  margin-right: 6rem;
+  margin-bottom: 4rem;
+}
+
+.rightWidget {
+  width: 70%;
+  margin: 1rem;
+}
+
+@media only screen and (max-width: 1170px) {
+  .main {
+    flex-direction: column;
+    position: relative;
+    top: 10rem;
+  }
+}
