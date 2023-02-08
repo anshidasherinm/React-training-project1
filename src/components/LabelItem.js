@@ -1,53 +1,40 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { labelActions } from "../store/label/label-slice";
 import { deleteLabel, updateLabel } from "../store/label/label-thunk";
 import { todoActions } from "../store/todo/todo-slice";
-import {
-  deleteLabelsinTodos,
-  updateLabelInTodos,
-  updateLabelsinTodos,
-} from "../store/todo/todo-thunk";
+import { Button } from "@mui/material";
+import IconMenu from "./IconMenu";
 
 import classes from "./LabelItem.module.css";
 const LabelItem = (props) => {
   const inputRef = useRef();
   const dispatch = useDispatch();
-  const todoItems = useSelector((state) => state.todo.items);
-  const groupedItems = useSelector((state) => state.todo.groupByLabel);
-  const allItems = useSelector((state) => state.todo.allItems);
+
   const [options, showOptions] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [saveBtn, setSaveBtn] = useState(false);
 
+  // const labelHandler = useMemo(() => {
+  //   console.log("inside the label function");
+  //   dispatch(todoActions.groupByLabel(props.keyOfLabel));
+  // }, [props.keyOfLabel]);
+
   const labelHandler = () => {
-    dispatch(todoActions.groupByLabel(props.title));
+    dispatch(todoActions.groupByLabel(props.keyOfLabel));
   };
 
   const removeLabelHandler = (id) => {
     showOptions(!options);
     dispatch(
       deleteLabel({
-        key: id,
+        key: props.keyOfLabel,
       })
     );
 
-    const changedTodos = {};
-    for (let i = 0; i < allItems.length; i++) {
-      changedTodos[allItems[i].key] = {
-        checked: allItems[i].checked,
-        id: allItems[i].id,
-        label: allItems[i].label === props.title ? "none" : allItems[i].label,
-        title: allItems[i].title,
-        key: allItems[i].key,
-      };
-    }
-    // console.log(toFirebase);
-    dispatch(deleteLabelsinTodos(changedTodos));
     dispatch(todoActions.setBacktoAllItems());
   };
 
-  const showOptionsHandler = (label) => {
+  const showOptionsHandler = () => {
     showOptions(!options);
   };
 
@@ -61,22 +48,6 @@ const LabelItem = (props) => {
         id: props.id,
       })
     );
-
-    const changedTodos = {};
-    for (let i = 0; i < allItems.length; i++) {
-      changedTodos[allItems[i].key] = {
-        checked: allItems[i].checked,
-        id: allItems[i].id,
-        label:
-          allItems[i].label === props.title
-            ? inputRef.current.value
-            : allItems[i].label,
-        title: allItems[i].title,
-        key: allItems[i].key,
-      };
-    }
-
-    dispatch(updateLabelsinTodos(changedTodos));
   };
   const updateLabelHandler = (label) => {
     showOptions(!options);
@@ -103,26 +74,26 @@ const LabelItem = (props) => {
             </div>
           </div>
           <div className={classes["arrow-right"]} />
-          {saveBtn && <button onClick={saveLabelnameHandler}>Save</button>}
+          {saveBtn && (
+            <div className={classes.saveBtn}>
+              <Button
+                size="small"
+                variant="outlined"
+                onClick={saveLabelnameHandler}
+              >
+                Save
+              </Button>
+            </div>
+          )}
         </div>
       </div>
+
       {options && (
-        <div className={classes.optionsDiv}>
-          <ul>
-            <li
-              className={classes.optionsBtn}
-              onClick={(e) => updateLabelHandler(props.id)}
-            >
-              Rename
-            </li>
-            <li
-              className={classes.optionsBtn}
-              onClick={(e) => removeLabelHandler(props.keyOfLabel)}
-            >
-              Delete
-            </li>
-          </ul>
-        </div>
+        <IconMenu
+          keyOfLabel={props.keyOfLabel}
+          removeLabelHandler={removeLabelHandler}
+          updateLabelHandler={updateLabelHandler}
+        />
       )}
     </React.Fragment>
   );

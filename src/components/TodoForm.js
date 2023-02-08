@@ -1,71 +1,86 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTodoItem } from "../store/todo/todo-thunk";
-import Button from "../ui/Button";
 import classes from "./TodoForm.module.css";
 import Message from "./Message";
 import { todoActions } from "../store/todo/todo-slice";
+import { Button } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 
 const TodoForm = (props) => {
-  let selectedLabel = document.querySelector("#select1")
-    ? document.querySelector("#select1").value
-    : "none";
   const dispatch = useDispatch();
   const labelItems = useSelector((state) => state.label.labels);
-  // console.log(labelItems[0]);
-  const todoRef = useRef();
+  const [selectedLabelKey, setSelectedLabelKey] = useState("none");
   const [notValid, setNotValid] = useState(false);
+  const [todoItem, setTodoItem] = useState("");
 
   const formSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log("selected label : ", selectedLabel);
-    if (todoRef.current.value) {
+    if (todoItem) {
       const newTodo = {
         id: Math.trunc(Math.random() * 2000),
-        title: todoRef.current.value,
-        label: selectedLabel,
+        title: todoItem,
+        labelKey: selectedLabelKey,
         checked: false,
       };
-      console.log(newTodo);
-      // setBacktoAllItems(state) {
       dispatch(todoActions.setBacktoAllItems());
       dispatch(addTodoItem(newTodo));
       setNotValid(false);
-      todoRef.current.value = "";
+      setTodoItem("");
     } else {
       setNotValid(true);
     }
   };
   const getLabelValue = (e) => {
-    selectedLabel = e.target.value;
-    // console.log(selectedLabel);
+    setSelectedLabelKey(e.target.value);
   };
 
   return (
     <div className={classes.formcontainer}>
-      <form className={classes.form} onSubmit={formSubmitHandler}>
-        <input ref={todoRef} type="text" placeholder="new todo item" />
-        <Button className={classes.button} type="submit" />
-        <label htmlFor="lables" className={classes.label}>
-          Select Label :
-        </label>
+      <form className={classes.form} id={classes.todoInput}>
+        <TextField
+          inputProps={{
+            style: {
+              width: "10rem",
+            },
+          }}
+          id="todoitem-name"
+          label="Add Todo"
+          variant="outlined"
+          value={todoItem}
+          onChange={(todo) => setTodoItem(todo.target.value)}
+        />
 
-        <select name="labels" onChange={getLabelValue} id="select1">
-          <option key="select" value="none">
-            select any
-          </option>
-          {labelItems.map((label, index) => {
-            // console.log(index);
-            return (
-              //selected
-              <option key={label.key} value={`${label.name}`}>
-                {label.name}
-              </option>
-            );
-          })}
-        </select>
+        <FormControl className={classes.labels}>
+          <InputLabel id="select-label">Label</InputLabel>
+          <Select
+            labelId="select-label"
+            id="simple-select"
+            value={selectedLabelKey}
+            label="Age"
+            onChange={getLabelValue}
+            fullWidth
+          >
+            <MenuItem value={`none`}>None</MenuItem>
+            {labelItems.map((label, index) => {
+              return (
+                <MenuItem value={`${label.key}`} key={label.key}>
+                  {label.name}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
+        <Button size="large" variant="outlined" onClick={formSubmitHandler}>
+          Add
+        </Button>
       </form>
-      {/* Loading message */}
       <Message />
       <span className={classes.errormsg}>
         {notValid && "Please add a todo !"}

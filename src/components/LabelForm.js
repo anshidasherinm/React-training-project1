@@ -1,49 +1,59 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addLabel } from "../store/label/label-thunk";
 import classes from "./LabelForm.module.css";
 import MessageLabel from "./MessageLabel";
+import { Button, TextField } from "@mui/material";
 
 const LabelForm = () => {
-  const labelInputRef = useRef();
   const dispatch = useDispatch();
   const [notValid, setNotValid] = useState(false);
+  const [label, setLabel] = useState("");
   const labelSubmitHandler = (event) => {
     event.preventDefault();
-
-    if (labelInputRef.current.value) {
+    if (label) {
       const newlabel = {
         id: Math.trunc(Math.random() * 2000),
-        name: labelInputRef.current.value,
+        name: label,
       };
       dispatch(addLabel(newlabel));
-      // console.log(newlabel);
       setNotValid(false);
-      labelInputRef.current.value = "";
+      setLabel("");
     } else {
       setNotValid(true);
     }
   };
+
   return (
     <React.Fragment>
       <div className={classes.labelForm}>
         <form onSubmit={labelSubmitHandler}>
-          <input
-            type="text"
-            className={classes.input}
-            ref={labelInputRef}
-            placeholder="Add label"
+          <TextField
+            inputProps={{
+              style: {
+                height: "10px",
+                width: "150px",
+              },
+            }}
+            id="label-name"
+            label="Label Name"
+            variant="outlined"
+            value={label}
+            onChange={(label) => setLabel(label.target.value)}
           />
-
-          <button>Add</button>
+          <Button size="large" variant="outlined" type="submit">
+            Add
+          </Button>
         </form>
       </div>
-      <div className={classes.message}>
-        <MessageLabel />
-        {notValid && (
-          <span className={classes.errormsg}>"Please add a label !"</span>
-        )}
-      </div>
+      {
+        <div className={classes.message}>
+          <MessageLabel />
+          {notValid && (
+            <span className={classes.errormsg}>"Please add a label !"</span>
+          )}
+        </div>
+      }
     </React.Fragment>
   );
 };

@@ -4,10 +4,7 @@ const apiService = async (
   type = "todo",
   renameLabels = false
 ) => {
-  // console.log(params);
   let url;
-  // console.log(params);
-  // console.log(JSON.stringify(params));
   const options = {
     method,
     headers: { "Content-Type": "application/json" },
@@ -20,10 +17,6 @@ const apiService = async (
     if (method === "PUT" || method === "DELETE") {
       url = `https://react-training-ad656-default-rtdb.firebaseio.com/todos2/${params.key}.json`;
     }
-
-    if (renameLabels === true && method === "PUT") {
-      url = `https://react-training-ad656-default-rtdb.firebaseio.com/todos2.json`;
-    }
   }
 
   if (type === "label") {
@@ -31,7 +24,6 @@ const apiService = async (
       "https://react-training-ad656-default-rtdb.firebaseio.com/labels.json";
 
     if (method === "PUT" || method === "DELETE") {
-      // console.log(params.key);
       url = `https://react-training-ad656-default-rtdb.firebaseio.com/labels/${params.key}.json`;
     }
   }
@@ -42,8 +34,6 @@ const apiService = async (
     console.log("Error in apiService!", response);
     throw new Error("Error in apiService!");
   }
-
-  // console.log(response);
 
   return response.json();
 };

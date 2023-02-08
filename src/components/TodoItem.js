@@ -8,12 +8,9 @@ const TodoItem = (props) => {
   const dispatch = useDispatch();
   const todoItems = useSelector((state) => state.todo.items);
   const todoItemsAll = useSelector((state) => state.todo.allItems);
-  // console.log("curret items ", todoItems);
-  // console.log("allitems :", todoItemsAll);
 
   const checkBoxClickHandler = (key, e) => {
     if (e.target.checked) {
-      // Complete
       const item = todoItems.find((e) => e.key === key);
       dispatch(updateTodo({ ...item, checked: true }));
     } else {
@@ -23,12 +20,8 @@ const TodoItem = (props) => {
     }
   };
 
-  // TODO - Implement removeTodoHandler and
-  // respective thunk, loading message
   const removeTodoHandler = (key) => {
     const item = todoItems.find((e) => e.key === key);
-    // dispatch(todoSlice.setKey(key));
-    // console.log(item);
     dispatch(deleteTodo({ ...item, checked: true }));
   };
 
@@ -53,4 +46,3 @@ const TodoItem = (props) => {
 };
 
 export default React.memo(TodoItem);
-// export default TodoItem;

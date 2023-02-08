@@ -21,18 +21,7 @@ const labelSlice = createSlice({
     deletingLabel: false,
     deletingLabelError: false,
   },
-  reducers: {
-    // groupByLabel(state, action) {
-    //   console.log("inside the group function");
-    //   console.log(action.payload);
-    //   // console.log(current(...state.labels));
-    //   state.groupLabels = state.labels.filter(
-    //     (label) => label.label === action.payload
-    //   );
-    //   // state.groupLabels = state.labels.map((label) => console.log(label));
-    //   // console.log(state.labels);
-    // },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     // Add new Todo item
     builder.addCase(addLabel.pending, (state) => {
@@ -40,7 +29,6 @@ const labelSlice = createSlice({
       state.addingLabelError = false;
     });
     builder.addCase(addLabel.fulfilled, (state, action) => {
-      console.log({ state, action });
       state.addingLabel = false;
       state.labels = [
         ...state.labels,
@@ -51,13 +39,13 @@ const labelSlice = createSlice({
       state.addingLabel = false;
       state.addingLabelError = true;
     });
+
     // Get Label List
     builder.addCase(getLabelList.pending, (state) => {
       state.loadingLabels = true;
       state.loadingLabelError = false;
     });
     builder.addCase(getLabelList.fulfilled, (state, action) => {
-      // console.log(state, action.payload);
       const labelItems = [];
       for (const key in action.payload) {
         labelItems.push({ key, ...action.payload[key] });
@@ -77,9 +65,7 @@ const labelSlice = createSlice({
     });
 
     builder.addCase(updateLabel.fulfilled, (state, action) => {
-      // console.log({ state, action });
       state.updatingLabel = false;
-      // console.log(state.labels);
       const labels = state.labels.map((item) => {
         if (item.key === action.payload.key) {
           return action.payload;
@@ -87,7 +73,6 @@ const labelSlice = createSlice({
         return item;
       });
       state.labels = [...labels];
-      // console.log(state.labels);
     });
     builder.addCase(updateLabel.rejected, (state) => {
       state.updatingLabel = false;
@@ -100,10 +85,7 @@ const labelSlice = createSlice({
       state.deletingLabelError = false;
     });
     builder.addCase(deleteLabel.fulfilled, (state, action) => {
-      // console.log({ state, action });
-      // console.log(action.meta.arg);
       state.deletingLabel = false;
-      // console.log(state.labels);
       state.labels = [
         ...state.labels.filter((item) => item.key !== action.meta.arg.key),
       ];

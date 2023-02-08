@@ -47,7 +47,6 @@ const deleteLabelsinTodos = createAsyncThunk(
 const deleteTodo = createAsyncThunk(
   "todo/deleteTodo",
   async (data, thunkAPI) => {
-    console.log(data);
     const response = await apiService(data, "DELETE");
     return response;
   }

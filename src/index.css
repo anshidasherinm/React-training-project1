@@ -8,10 +8,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
   /* width: 100vh; */
-  display: flex;
+  /* display: flex;
   justify-items: center;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
   background-image: linear-gradient(to bottom, #ddaddd, #998beb);
   /* background-color: yellow; */
 }

@@ -1,16 +1,25 @@
+import { LinearProgress } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
 
 function Message() {
-  const { addingTodoItem, loadingList, updatingTodo, deletingTodoItem } =
-    useSelector((state) => state.todo);
+  const {
+    addingTodoItem,
+    loadingList,
+    updatingTodo,
+    deletingTodoItem,
+    addingTodoItemError,
+    loadingListError,
+    updatingTodoError,
+    deletingTodoItemError,
+  } = useSelector((state) => state.todo);
 
   if (updatingTodo) {
-    return <div>Updating todo list...</div>;
+    return <LinearProgress />;
   }
 
   if (addingTodoItem) {
-    return <div>Adding New Todo item...</div>;
+    return <LinearProgress />;
   }
 
   if (loadingList) {
@@ -18,7 +27,16 @@ function Message() {
   }
 
   if (deletingTodoItem) {
-    return <div>Deleting Todo...</div>;
+    return <LinearProgress />;
+  }
+
+  if (
+    addingTodoItemError ||
+    loadingListError ||
+    updatingTodoError ||
+    deletingTodoItemError
+  ) {
+    return <div>Error ! could not perform action</div>;
   }
 
   return null;

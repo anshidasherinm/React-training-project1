@@ -10,7 +10,6 @@ const getLabelList = createAsyncThunk(
   "label/getLabel",
   async (data, thunkAPI) => {
     const response = await apiService(data, "GET", "label");
-    // console.log(response);
     return response;
   }
 );
@@ -19,24 +18,13 @@ const updateLabel = createAsyncThunk(
   "label/updateLabel",
   async (data, thunkAPI) => {
     const response = await apiService(data, "PUT", "label");
-    // console.log(data);
     return response;
   }
 );
 
-// const renameLabel=createAsyncThunk(
-//   "label/renameLabel",
-//   async (data, thunkAPI) => {
-//     console.log(data);
-//     // const response = await apiService(data, "PUT", "label");
-//     // return response;
-//   }
-// );
-
 const deleteLabel = createAsyncThunk(
   "label/deleteLabel",
   async (data, thunkAPI) => {
-    console.log(data);
     const response = await apiService(data, "DELETE", "label");
     return response;
   }

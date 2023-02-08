@@ -10,8 +10,6 @@ const TodosContainer = (props) => {
   useEffect(() => {
     dispatch(getTodoList());
   }, []);
-  const labelItems = useSelector((state) => state.todo.allItems);
-  console.log("all items", labelItems);
 
   return (
     <React.Fragment>

@@ -70,35 +70,19 @@
 }
 
 .optionsDiv {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: left;
   height: 75px;
   width: 70px;
   background-color: white;
   border: 1px solid rgba(224, 217, 217, 0.753);
   margin-bottom: 1rem;
-  /* position: relative; */
   position: absolute;
-  /* top: 40px; */
   left: 5px;
   z-index: 10;
 }
 
-ul {
-  margin: 0;
-  padding: 10px;
-}
-li {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  border-bottom: 1px solid black;
+.saveBtn {
+  margin-left: 2rem;
 }
 
 li:hover {

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { act } from "react-dom/test-utils";
 import { keyValue } from "../../components/TodoItem";
+import { updateLabel, deleteLabel } from "../label/label-thunk";
 
 import {
   addTodoItem,
@@ -33,11 +34,9 @@ const todoSlice = createSlice({
   reducers: {
     groupByLabel(state, action) {
       state.items = [...state.allItems];
-      console.log("inside the group function");
-
       let groupedLabels = [];
       groupedLabels = state.items.filter(
-        (item) => item.label === action.payload
+        (item) => item.labelKey === action.payload
       );
 
       state.items = [...groupedLabels];
@@ -54,15 +53,12 @@ const todoSlice = createSlice({
       state.addingTodoItemError = false;
     });
     builder.addCase(addTodoItem.fulfilled, (state, action) => {
-      console.log({ state, action });
-      console.log(action.meta.arg.label);
       state.addingTodoItem = false;
       state.items = [
         ...state.items,
         {
           key: action.payload.name,
           ...action.meta.arg,
-          label: action.meta.arg.label,
         },
       ];
       state.allItems = state.items;
@@ -114,62 +110,6 @@ const todoSlice = createSlice({
     builder.addCase(updateTodo.rejected, (state) => {
       state.updatingTodo = false;
       state.updatingTodoError = true;
-    });
-
-    //updating labels
-
-    builder.addCase(updateLabelsinTodos.pending, (state) => {
-      state.updatingLabelInTodoItem = true;
-      state.updatingLabelInTodoItemError = false;
-    });
-    builder.addCase(updateLabelsinTodos.fulfilled, (state, action) => {
-      const items = action.meta.arg;
-      const itemsArray = [];
-      for (const key in items) {
-        itemsArray.push(items[key]);
-      }
-      const allItems = itemsArray.map((item) => {
-        return {
-          label: item.label,
-          id: item.id,
-          checked: item.checked,
-          title: item.title,
-          key: item.key,
-        };
-      });
-      state.allItems = [...allItems];
-    });
-    builder.addCase(updateLabelsinTodos.rejected, (state) => {
-      state.updatingLabelInTodoItem = false;
-      state.updatingLabelInTodoItemError = true;
-    });
-
-    //deleting  labels
-
-    builder.addCase(deleteLabelsinTodos.pending, (state) => {
-      state.deletingLabelInTodoItem = true;
-      state.deletingLabelInTodoItemError = false;
-    });
-    builder.addCase(deleteLabelsinTodos.fulfilled, (state, action) => {
-      const items = action.meta.arg;
-      const itemsArray = [];
-      for (const key in items) {
-        itemsArray.push(items[key]);
-      }
-      const allItems = itemsArray.map((item) => {
-        return {
-          label: item.label,
-          id: item.id,
-          checked: item.checked,
-          title: item.title,
-          key: item.key,
-        };
-      });
-      state.allItems = [...allItems];
-    });
-    builder.addCase(deleteLabelsinTodos.rejected, (state) => {
-      state.deletingLabelInTodoItem = false;
-      state.deletingLabelInTodoItemError = true;
     });
 
     //Delete todo Item

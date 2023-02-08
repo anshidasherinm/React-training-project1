@@ -1,14 +1,7 @@
-/* body {
-  height: 100vh;
-  background-image: linear-gradient(to bottom, #ddaddd, #998beb);
-} */
-
 .App {
-  /* width: 100%; */
-  /* background-color: indianred; */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   overflow: hidden;
 }
@@ -16,8 +9,6 @@
   text-align: center;
   color: white;
   width: 500px;
-  position: absolute;
-  top: 3rem;
   margin: auto;
 }
 
@@ -32,30 +23,49 @@ h1 {
   flex-direction: row;
   align-items: center;
   margin: 1rem;
-  /* min-width: 600px; */
-  /* background-color: olive; */
+  width: 80%;
+  padding-bottom: 1rem;
+
   justify-content: space-between;
 }
 
 .leftWidget {
-  /* width: 20%; */
   min-width: 350px;
-  /* background-color: aqua; */
   margin-left: 3rem;
   margin-top: 4rem;
-  margin-right: 6rem;
+  margin-right: 3rem;
   margin-bottom: 4rem;
 }
 
 .rightWidget {
-  width: 70%;
+  width: 50%;
   margin: 1rem;
 }
 
-@media only screen and (max-width: 1170px) {
+@media only screen and (max-width: 1386px) {
   .main {
     flex-direction: column;
     position: relative;
-    top: 10rem;
+    top: 4rem;
+    min-width: 873px;
+    justify-content: space-evenly;
+    margin-bottom: 9rem;
+  }
+
+  .leftWidget {
+    min-width: 350px;
+    margin-left: 3rem;
+    margin-top: 0rem;
+    margin-right: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  .rightWidget {
+    min-width: 300px;
+  }
+
+  .App {
+    min-width: 700px;
   }
 }
+/* add empty validation to label name */

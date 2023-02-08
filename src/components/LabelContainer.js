@@ -4,24 +4,24 @@ import { getLabelList } from "../store/label/label-thunk";
 import { todoActions } from "../store/todo/todo-slice";
 import classes from "./LabelContainer.module.css";
 import LabelItem from "./LabelItem";
+import { Button } from "@mui/material";
 
 const LabelContainer = () => {
   const labelItems = useSelector((state) => state.label.labels);
-  // console.log(labelItems);
   const dispatch = useDispatch();
-  // console.log("inside the label container");
   useEffect(() => {
     dispatch(getLabelList());
   }, []);
-  // console.log(labelItems);
   const showAllHandler = () => {
     dispatch(todoActions.setBacktoAllItems());
   };
   return (
     <div className={classes.container}>
-      <button onClick={showAllHandler} className={classes.allBtn}>
-        All
-      </button>
+      <div className={classes.allBtn}>
+        <Button size="large" onClick={showAllHandler} variant="outlined">
+          All
+        </Button>
+      </div>
       {labelItems.map((label) => {
         return (
           <LabelItem
@@ -37,4 +37,3 @@ const LabelContainer = () => {
 };
 
 export default React.memo(LabelContainer);
-// export default LabelContainer;
