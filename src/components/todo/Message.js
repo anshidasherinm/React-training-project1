@@ -1,10 +1,22 @@
-import { ClassNames } from "@emotion/react";
 import { LinearProgress } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
-import classes from "./Message.module.css";
 
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  message: {
+    color: "white",
+    width: "100%",
+  },
+
+  errorMessage: {
+    color: "red",
+    width: "80%",
+  },
+});
 function Message() {
+  const classes = useStyles();
   const {
     addingTodoItem,
     loadingList,

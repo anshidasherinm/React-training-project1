@@ -1,11 +1,28 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import classes from "./TodoItem.module.css";
 import { updateTodo, deleteTodo } from "../../store/todo/todo-thunk";
 import { Checkbox, ListItemIcon, ListItemText, ListItem } from "@mui/material";
 
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  remove: {
+    color: "red",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "1rem",
+    fontSize: "larger",
+    marginLeft: "10px",
+    "&:hover": {
+      color: "rgb(243, 65, 65)",
+    },
+  },
+});
+
 const TodoItem = (props) => {
   const dispatch = useDispatch();
+  const classes = useStyles();
   const todoItems = useSelector((state) => state.todo.items);
 
   const checkBoxClickHandler = (key, e) => {

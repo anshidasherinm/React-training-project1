@@ -1,9 +1,4 @@
-const apiService = async (
-  params,
-  method = "GET",
-  type = "todo",
-  renameLabels = false
-) => {
+const apiService = async (params, method = "GET", type = "todo") => {
   let url;
   const options = {
     method,

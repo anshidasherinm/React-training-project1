@@ -19,7 +19,7 @@ const todoSlice = createSlice({
     updatingLabelInTodoItemError: false,
     deletingLabelInTodoItem: false,
     deletingLabelInTodoItemError: false,
-    changed: false,
+    // changed: false,
   },
   reducers: {
     groupByLabel(state, action) {
@@ -85,6 +85,7 @@ const todoSlice = createSlice({
       state.updatingTodo = false;
       const items = state.items.map((item) => {
         if (item.key === action.payload.key) {
+          // console.log(action.payload);
           return action.payload;
         }
         return item;

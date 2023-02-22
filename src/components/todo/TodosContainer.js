@@ -1,12 +1,22 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import classes from "./TodosContainer.module.css";
 import { getTodoList } from "../../store/todo/todo-thunk";
 import NewTodoList from "./NewTodoList";
 import CompletedTodoList from "./CompletedTodoList";
 import { Card } from "@mui/material";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  seperator: {
+    width: "0.5px",
+    backgroundColor: "grey",
+    height: "100%",
+    border: "0.5px solid grey",
+  },
+});
 
 const TodosContainer = (props) => {
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {

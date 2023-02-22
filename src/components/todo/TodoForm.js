@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTodoItem } from "../../store/todo/todo-thunk";
-import classes from "./TodoForm.module.css";
 import Message from "./Message";
 import { todoActions } from "../../store/todo/todo-slice";
 import { Button, Card } from "@mui/material";
@@ -13,9 +12,45 @@ import {
   TextField,
   Grid,
 } from "@mui/material";
+import { makeStyles } from "@material-ui/core/styles";
+const useStyles = makeStyles({
+  errormsg: {
+    height: "2rem",
+    fontSize: "medium",
+    color: "red",
+    width: "80%",
+    marginLeft: "5rem",
+  },
+  todoForm: {
+    padding: "0rem",
+    height: "100%",
+    width: "90%",
+    display: "flex",
+    flexDirection: "column",
+    fontSize: "large",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  labels: {
+    width: "25%",
+    marginLeft: "1rem",
+    marginRight: "1rem",
+  },
+
+  message: {
+    marginTop: "1rem",
+    marginBottom: "1rem",
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
 
 const TodoForm = (props) => {
   const dispatch = useDispatch();
+  const classes = useStyles();
   const labelItems = useSelector((state) => state.label.labels);
   const [selectedLabelKey, setSelectedLabelKey] = useState("none");
   const [notValid, setNotValid] = useState(false);
