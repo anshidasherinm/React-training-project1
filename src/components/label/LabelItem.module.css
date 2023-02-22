@@ -1,0 +1,143 @@
+.remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  margin-left: 10px;
+}
+
+.label {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 30px;
+  padding-left: 1rem;
+  width: 60%;
+  max-width: 230px;
+  background-color: #a89ee0;
+  margin-left: 1rem;
+}
+
+.labelParent {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+  color: white;
+  /* padding-left: 1rem; */
+}
+
+.arrow-right {
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 15px solid #a89ee0;
+}
+
+.fullLabel {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.optionsDiv {
+  align-items: left;
+  height: 75px;
+  width: 70px;
+  background-color: white;
+  border: 1px solid rgba(224, 217, 217, 0.753);
+  margin-bottom: 1rem;
+  position: absolute;
+  left: 5px;
+  z-index: 10;
+}
+
+.saveBtn {
+  margin-left: 2rem;
+}
+
+li:hover {
+  cursor: pointer;
+}
+.optionsBtn {
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  width: 50px;
+  font-size: smaller;
+  background-color: white;
+}
+
+/* .faEdit {
+  margin-left: 1rem;
+  padding: 0.3rem;
+  padding-right: 0.7rem;
+  color: green;
+  border-radius: 5rem;
+  background-color: rgb(161, 236, 161);
+  width: 10px;
+  /* margin-right: 0.5rem; */
+/* }
+
+.faTrash { */
+/* float: right;
+  color: black; */
+/* margin-left: 1rem;
+  padding: 0.3rem;
+  padding-right: 0.7rem;
+  color: rgba(245, 31, 31, 0.911);
+  border-radius: 5rem;
+  background-color: rgb(231, 108, 92);
+  width: 10px; */
+/* }  */
+
+.newLabelName {
+  width: 30%;
+  /* border-bottom: 0.5px solid black; */
+  margin-right: 1rem;
+}
+
+/* .labelButton input[type="text"] {
+  width: "20%";
+  background-color: yellow;
+} */
+/* //chnage input text filed size  */
+.titleOfLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 1rem;
+  margin-bottom: 1rem;
+  /* width: "50%"; */
+}
+
+/* .titleOfLabel input[type="text"] {
+  background-color: yellow;
+}
+
+#newLabel input[type="text"] {
+  background-color: yellow;
+} */
+.labelButton {
+  height: 20px;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: transparent;
+  font-size: medium;
+  outline: none;
+  border: transparent;
+  display: flex;
+  align-items: center;
+  word-wrap: break-word;
+}

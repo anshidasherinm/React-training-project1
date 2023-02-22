@@ -1,0 +1,9 @@
+.message {
+  width: 90%;
+  padding-left: 1rem;
+}
+.errormsg {
+  width: 90%;
+  padding-left: 1rem;
+  color: red;
+}

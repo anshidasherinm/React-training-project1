@@ -1,0 +1,25 @@
+.container {
+  height: 240px;
+  width: 310px;
+  background-color: white;
+  overflow-y: auto;
+  margin-left: 1rem;
+  padding-bottom: 1rem;
+  position: relative;
+}
+
+.allBtn {
+  margin-top: 2rem;
+  margin-bottom: 0rem;
+  margin-left: 1rem;
+  width: 100px;
+}
+
+.emptyList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 8rem;
+  color: white;
+}
