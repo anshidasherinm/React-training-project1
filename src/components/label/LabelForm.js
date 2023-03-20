@@ -1,16 +1,21 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addLabel } from "../../store/label/label-thunk";
-import classes from "./LabelForm.module.css";
-import MessageLabel from "./MessageLabel";
+import { useAppDispatch } from "store/redux-hooks";
+import { addLabel } from "store/label/label-thunk";
+import classes from "components/label/LabelForm.module.css";
+import MessageLabel from "components/label/MessageLabel";
 import { Button, Card, TextField } from "@mui/material";
 
 const LabelForm = (props) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [notValid, setNotValid] = useState(false);
   const [label, setLabel] = useState("");
-  const labelSubmitHandler = (event) => {
-    event.preventDefault();
+
+  const labelSubmitHandler = async (event) => {
+    console.log("label form submitted");
+    // event.preventDefault();
+    // event.nativeEvent.stopImmediatePropagation();
+    // event.stopPropagation();
     if (label) {
       const newlabel = {
         id: Math.trunc(Math.random() * 2000),
@@ -39,8 +44,9 @@ const LabelForm = (props) => {
           height: "9rem",
         }}
       >
-        <form onSubmit={labelSubmitHandler} className={classes.labelForm}>
+        <form className={classes.labelForm}>
           <TextField
+            data-testid={"input-label"}
             sx={{
               width: "60%",
               fontSize: "2rem",
@@ -63,6 +69,7 @@ const LabelForm = (props) => {
               style: {
                 backgroundColor: "#494848be",
               },
+              "data-testid": "input-label2",
             }}
             id="label-name"
             label="Label Name"
@@ -72,6 +79,7 @@ const LabelForm = (props) => {
           />
 
           <Button
+            onClick={labelSubmitHandler}
             sx={{
               backgroundColor: "orange",
               color: "white",
@@ -85,7 +93,7 @@ const LabelForm = (props) => {
             }}
             size="medium"
             variant="outlined"
-            type="submit"
+            data-testid={"label-add"}
           >
             Add
           </Button>

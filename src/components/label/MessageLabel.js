@@ -1,7 +1,7 @@
-import { LinearProgress } from "@mui/material";
 import React from "react";
-import { useSelector } from "react-redux";
-import classes from "./MessageLabel.module.css";
+import { LinearProgress } from "@mui/material";
+import { useAppSelector } from "store/redux-hooks";
+import classes from "components/label/MessageLabel.module.css";
 
 function MessageLabel() {
   const {
@@ -13,7 +13,18 @@ function MessageLabel() {
     loadingLabelError,
     updatingLabelError,
     deletingLabelError,
-  } = useSelector((state) => state.label);
+  } = useAppSelector((state) => state.label);
+  // const {
+  //   addingTodoItem,
+  //   loadingList,
+  //   updatingTodo,
+  //   deletingTodoItem,
+  //   addingTodoItemError,
+  //   loadingListError,
+  //   updatingTodoError,
+  //   deletingTodoItemError,
+  //   // } = useSelector((state) => state.todo);
+  // } = useAppSelector((state) => state.todo);
 
   if (addingLabel) {
     return (
@@ -21,6 +32,7 @@ function MessageLabel() {
         <LinearProgress
           sx={{
             backgroundColor: "white",
+
             "& .MuiLinearProgress-barColorPrimary": {
               backgroundColor: "orange",
             },
@@ -36,6 +48,7 @@ function MessageLabel() {
         <LinearProgress
           sx={{
             backgroundColor: "white",
+
             "& .MuiLinearProgress-barColorPrimary": {
               backgroundColor: "orange",
             },
@@ -55,6 +68,7 @@ function MessageLabel() {
         <LinearProgress
           sx={{
             backgroundColor: "white",
+
             "& .MuiLinearProgress-barColorPrimary": {
               backgroundColor: "orange",
             },

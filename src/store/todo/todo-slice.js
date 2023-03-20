@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { addTodoItem, getTodoList, updateTodo, deleteTodo } from "./todo-thunk";
+import {
+  addTodoItem,
+  getTodoList,
+  updateTodo,
+  deleteTodo,
+} from "store/todo/todo-thunk";
 
 const todoSlice = createSlice({
   name: "todo",
@@ -15,11 +20,6 @@ const todoSlice = createSlice({
     updatingTodoError: false,
     deletingTodoItem: false,
     deletingTodoItemError: false,
-    updatingLabelInTodoItem: false,
-    updatingLabelInTodoItemError: false,
-    deletingLabelInTodoItem: false,
-    deletingLabelInTodoItemError: false,
-    // changed: false,
   },
   reducers: {
     groupByLabel(state, action) {
@@ -70,6 +70,7 @@ const todoSlice = createSlice({
       state.loadingList = false;
       state.items = [...items];
       state.allItems = state.items;
+      console.log(state.items);
     });
     builder.addCase(getTodoList.rejected, (state) => {
       state.loadingList = false;
@@ -85,7 +86,6 @@ const todoSlice = createSlice({
       state.updatingTodo = false;
       const items = state.items.map((item) => {
         if (item.key === action.payload.key) {
-          // console.log(action.payload);
           return action.payload;
         }
         return item;
@@ -126,3 +126,5 @@ const todoSlice = createSlice({
 
 export const todoActions = todoSlice.actions;
 export default todoSlice;
+
+export const todoReducer = todoSlice.reducer;

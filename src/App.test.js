@@ -1,8 +1,20 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import { useAppDispatch, useAppSelector } from "store/redux-hooks";
+import { testUseAppSelector } from "store/test-app-selector";
+import "@testing-library/jest-dom";
+import App from "./App";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+jest.mock("store/redux-hooks");
+describe("App", () => {
+  beforeEach(() => {
+    useAppSelector.mockImplementation(testUseAppSelector);
+    // const dispatch = jest.fn();
+    useAppDispatch.mockReturnValue(jest.fn());
+  });
+
+  it("renders My Todo App text", () => {
+    render(<App />);
+    const linkElement = screen.getByText(/My Todo App/i);
+    expect(linkElement).toBeInTheDocument();
+  });
 });

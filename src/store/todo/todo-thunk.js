@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { apiService } from "../../utils/";
+import { apiService } from "utils";
 
 const addTodoItem = createAsyncThunk(
   "todo/addTodoItem",
@@ -12,6 +12,7 @@ const addTodoItem = createAsyncThunk(
 const getTodoList = createAsyncThunk(
   "todo/getTodoList",
   async (data, thunkAPI) => {
+    // console.log(thunkAPI);
     const response = await apiService(data, "GET");
     return response;
   }

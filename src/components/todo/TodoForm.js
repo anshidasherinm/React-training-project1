@@ -1,18 +1,12 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addTodoItem } from "../../store/todo/todo-thunk";
-import Message from "./Message";
-import { todoActions } from "../../store/todo/todo-slice";
+import { addTodoItem } from "store/todo/todo-thunk";
+import { todoActions } from "store/todo/todo-slice";
+import { useAppDispatch, useAppSelector } from "store/redux-hooks";
+import Message from "components/todo/Message";
 import { Button, Card } from "@mui/material";
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Grid,
-} from "@mui/material";
+import { MenuItem, Select, TextField, Grid } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
+
 const useStyles = makeStyles({
   errormsg: {
     height: "2rem",
@@ -49,15 +43,17 @@ const useStyles = makeStyles({
 });
 
 const TodoForm = (props) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const classes = useStyles();
-  const labelItems = useSelector((state) => state.label.labels);
+  const labelItems = useAppSelector((state) => state.label.labels);
   const [selectedLabelKey, setSelectedLabelKey] = useState("none");
   const [notValid, setNotValid] = useState(false);
   const [todoItem, setTodoItem] = useState("");
 
   const formSubmitHandler = async (event) => {
-    event.preventDefault();
+    // event.nativeEvent.stopImmediatePropagation();
+    console.log("todo form submitted");
+    // event.stopPropagation();
     if (todoItem) {
       const newTodo = {
         id: Math.trunc(Math.random() * 2000),
@@ -77,89 +73,103 @@ const TodoForm = (props) => {
     setSelectedLabelKey(e.target.value);
   };
 
+  const styles = {
+    card: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "#383838",
+      paddingTop: "1rem",
+      marginBottom: "1rem",
+    },
+    grid_parent: {
+      width: "100%",
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    grid_child1: {
+      display: "flex",
+      marginTop: "1rem",
+      flexDirection: "row",
+      alignItems: "center",
+
+      justifyContent: "space-evenly",
+    },
+    textfield: {
+      width: "50%",
+      backgroundColor: "#494848be",
+      color: "black",
+      ".MuiOutlinedInput-notchedOutline": {
+        borderColor: "orange !important",
+        color: "orange",
+      },
+      ".MuiInputBase-input": {
+        color: "white",
+      },
+    },
+    select: {
+      width: "100%",
+      backgroundColor: "#494848be",
+      fontSize: "1rem",
+      color: "orange",
+      ".MuiOutlinedInput-notchedOutline": {
+        borderColor: "orange !important",
+      },
+      "& .MuiSvgIcon-root": {
+        color: "orange",
+      },
+    },
+    grid_child2: {
+      display: "flex",
+      marginTop: "1rem",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    button: {
+      backgroundColor: "orange",
+      color: "white",
+      fontSize: "1.3rem",
+      fontWeight: "large",
+      ":hover": {
+        backgroundColor: "#ffb347",
+        color: "white",
+        border: "none",
+      },
+    },
+    inputlabelprops: { fontSize: "1.2rem", color: "orange" },
+  };
+
   return (
     <React.Fragment>
-      <Card
-        variant="outlined"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#383838",
-          paddingTop: "1rem",
-          marginBottom: "1rem",
-        }}
-      >
+      <Card variant="outlined" style={styles.card}>
         <form className={classes.todoForm}>
-          <Grid
-            container
-            spacing={0}
-            style={{
-              width: "100%",
-              // backgroundColor: "green",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              // backgroundColor: "yellow",
-            }}
-          >
-            <Grid
-              item
-              xs={12}
-              md={9}
-              style={{
-                display: "flex",
-                marginTop: "1rem",
-                flexDirection: "row",
-                alignItems: "center",
-
-                justifyContent: "space-evenly",
-              }}
-            >
+          <Grid container spacing={0} style={styles.grid_parent}>
+            <Grid item xs={12} md={9} style={styles.grid_child1}>
               <TextField
-                sx={{
-                  width: "50%",
-                  backgroundColor: "#494848be",
-                  color: "black",
-                  ".MuiOutlinedInput-notchedOutline": {
-                    borderColor: "orange !important",
-                    color: "orange",
-                  },
-                  ".MuiInputBase-input": {
-                    color: "white",
-                  },
-                }}
+                sx={styles.textfield}
                 InputLabelProps={{
-                  style: { fontSize: "1.2rem", color: "orange" },
+                  style: styles.inputlabelprops,
                 }}
                 id="todoitem-name"
                 label="Add Todo"
                 variant="outlined"
                 value={todoItem}
                 onChange={(todo) => setTodoItem(todo.target.value)}
+                data-testid={"input-todo-title"}
               />
-
-              <FormControl className={classes.labels}>
+              <div className={classes.labels}>
                 <Select
-                  sx={{
-                    width: "100%",
-                    backgroundColor: "#494848be",
-                    fontSize: "1rem",
-                    color: "orange",
-                    ".MuiOutlinedInput-notchedOutline": {
-                      borderColor: "orange !important",
-                    },
-                    "& .MuiSvgIcon-root": {
-                      color: "orange",
-                    },
-                  }}
+                  sx={styles.select}
                   labelId="select-label"
                   id="simple-select"
                   value={selectedLabelKey}
                   onChange={getLabelValue}
                   fullWidth
+                  data-testid={"label-select"}
                 >
                   <MenuItem value={`none`}>None</MenuItem>
                   {labelItems.map((label, index) => {
@@ -170,35 +180,15 @@ const TodoForm = (props) => {
                     );
                   })}
                 </Select>
-              </FormControl>
+              </div>
             </Grid>
-            <Grid
-              item
-              xs={12}
-              md={2}
-              style={{
-                display: "flex",
-                marginTop: "1rem",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+            <Grid item xs={12} md={2} style={styles.grid_child2}>
               <Button
                 size="large"
                 variant="outlined"
                 onClick={formSubmitHandler}
-                sx={{
-                  backgroundColor: "orange",
-                  color: "white",
-                  fontSize: "1.3rem",
-                  fontWeight: "large",
-                  ":hover": {
-                    backgroundColor: "#ffb347",
-                    color: "white",
-                    border: "none",
-                  },
-                }}
+                sx={styles.button}
+                data-testid={"todo-add"}
               >
                 Add
               </Button>

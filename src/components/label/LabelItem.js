@@ -22,17 +22,19 @@ import EditIcon from "@mui/icons-material/Edit";
 import ListItemIcon from "@mui/material/ListItemIcon";
 
 import classes from "./LabelItem.module.css";
+import { useAppDispatch, useAppSelector } from "store/redux-hooks";
 const LabelItem = (props) => {
   const inputRef = useRef();
-  const dispatch = useDispatch();
+
+  const dispatch = useAppDispatch();
+  const todoItems = useAppSelector((state) =>
+    state.todo.allItems.filter((todo) => todo.labelKey === props.keyOfLabel)
+  );
 
   const [options, showOptions] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [saveBtn, setSaveBtn] = useState(false);
 
-  const todoItems = useSelector((state) =>
-    state.todo.allItems.filter((todo) => todo.labelKey === props.keyOfLabel)
-  );
   const count = todoItems.length;
   const labelHandler = () => {
     dispatch(todoActions.groupByLabel(props.keyOfLabel));
@@ -132,6 +134,7 @@ const LabelItem = (props) => {
             >
               <p id="edit" className={classes.titleOfLabel}>
                 <input
+                  data-testid={"label-name-input"}
                   ref={inputRef}
                   className={classes.labelButton}
                   defaultValue={props.title}
@@ -157,6 +160,7 @@ const LabelItem = (props) => {
           {saveBtn === false && (
             <React.Fragment>
               <EditIcon
+                data-testid={"label-editIcon"}
                 sx={{
                   marginLeft: "2rem",
                   padding: "0.2rem",
@@ -167,6 +171,7 @@ const LabelItem = (props) => {
                 onClick={editLabelHandler}
               />
               <DeleteIcon
+                data-testid={"label-deleteIcon"}
                 onClick={removeLabelHandler}
                 sx={{
                   color: "rgba(245, 31, 31, 0.911)",

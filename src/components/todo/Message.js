@@ -1,7 +1,6 @@
-import { LinearProgress } from "@mui/material";
 import React from "react";
-import { useSelector } from "react-redux";
-
+import { useAppSelector } from "store/redux-hooks";
+import { LinearProgress } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -15,6 +14,16 @@ const useStyles = makeStyles({
     width: "80%",
   },
 });
+
+const styles = {
+  progress: {
+    backgroundColor: "white",
+    "& .MuiLinearProgress-barColorPrimary": {
+      //
+      backgroundColor: "orange",
+    },
+  },
+};
 function Message() {
   const classes = useStyles();
   const {
@@ -26,19 +35,12 @@ function Message() {
     loadingListError,
     updatingTodoError,
     deletingTodoItemError,
-  } = useSelector((state) => state.todo);
-
+    // } = useSelector((state) => state.todo);
+  } = useAppSelector((state) => state.todo);
   if (updatingTodo) {
     return (
       <div className={classes.message}>
-        <LinearProgress
-          sx={{
-            backgroundColor: "white",
-            "& .MuiLinearProgress-barColorPrimary": {
-              backgroundColor: "orange",
-            },
-          }}
-        />
+        <LinearProgress sx={styles.progress} />
       </div>
     );
   }
@@ -46,14 +48,7 @@ function Message() {
   if (addingTodoItem) {
     return (
       <div className={classes.message}>
-        <LinearProgress
-          sx={{
-            backgroundColor: "white",
-            "& .MuiLinearProgress-barColorPrimary": {
-              backgroundColor: "orange",
-            },
-          }}
-        />
+        <LinearProgress sx={styles.progress} />
       </div>
     );
   }
@@ -65,14 +60,7 @@ function Message() {
   if (deletingTodoItem) {
     return (
       <div className={classes.message}>
-        <LinearProgress
-          sx={{
-            backgroundColor: "white",
-            "& .MuiLinearProgress-barColorPrimary": {
-              backgroundColor: "orange",
-            },
-          }}
-        />
+        <LinearProgress sx={styles.progress} />
       </div>
     );
   }

@@ -1,15 +1,43 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getLabelList } from "../../store/label/label-thunk";
-import { todoActions } from "../../store/todo/todo-slice";
-import classes from "./LabelContainer.module.css";
-import LabelItem from "./LabelItem";
+import LabelItem from "components/label/LabelItem";
+import { getLabelList } from "store/label/label-thunk";
+import { todoActions } from "store/todo/todo-slice";
+import { useAppDispatch, useAppSelector } from "store/redux-hooks";
 import { Button, Card, List } from "@mui/material";
+import { makeStyles } from "@material-ui/core/styles";
 
+const useStyles = makeStyles({
+  container: {
+    height: "240px",
+    width: "310px",
+    backgroundColor: "white",
+    overflowY: "auto",
+    marginLeft: "1rem",
+    paddingBottom: "1rem",
+    position: "relative",
+  },
+
+  allBtn: {
+    marginTop: "2rem",
+    marginBottom: "0rem",
+    marginLeft: "1rem",
+    width: "100px",
+  },
+
+  emptyList: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "8rem",
+    color: "white",
+  },
+});
 const LabelContainer = (props) => {
-  const labelItems = useSelector((state) => state.label.labels);
-  const dispatch = useDispatch();
-
+  const labelItems = useAppSelector((state) => state.label.labels);
+  console.log(labelItems);
+  const dispatch = useAppDispatch();
+  const classes = useStyles();
   useEffect(() => {
     dispatch(getLabelList());
   }, []);
@@ -64,6 +92,7 @@ const LabelContainer = (props) => {
           {labelItems.map((label) => {
             return (
               <LabelItem
+                data-testid={"input-labelitem"}
                 id={label.id}
                 title={label.name}
                 key={label.key}
@@ -80,4 +109,4 @@ const LabelContainer = (props) => {
   );
 };
 
-export default React.memo(LabelContainer);
+export default LabelContainer;

@@ -1,10 +1,11 @@
 import React from "react";
-import "./App.css";
-import TodoForm from "./components/todo/TodoForm";
-import TodosContainer from "./components/todo/TodosContainer";
-import LabelForm from "./components/label/LabelForm";
-import LabelContainer from "./components/label/LabelContainer";
 import { Grid } from "@mui/material";
+import TodoForm from "components/todo/TodoForm";
+import TodosContainer from "components/todo/TodosContainer";
+import LabelForm from "components/label/LabelForm";
+import LabelContainer from "components/label/LabelContainer";
+import "./App.css";
+
 function App() {
   return (
     <React.Fragment>

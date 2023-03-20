@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { apiService } from "../../utils";
+import { apiService } from "utils";
 
 const addLabel = createAsyncThunk("label/addLabel", async (data, thunkAPI) => {
   const response = await apiService(data, "POST", "label");
@@ -9,7 +9,10 @@ const addLabel = createAsyncThunk("label/addLabel", async (data, thunkAPI) => {
 const getLabelList = createAsyncThunk(
   "label/getLabel",
   async (data, thunkAPI) => {
+    console.log("data", data);
     const response = await apiService(data, "GET", "label");
+
+    console.log(response);
     return response;
   }
 );

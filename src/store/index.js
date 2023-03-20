@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import todoSlice from "./todo/todo-slice";
-import labelSlice from "./label/label-slice";
+import todoSlice from "store/todo/todo-slice";
+import labelSlice from "store/label/label-slice";
 
 const store = configureStore({
   reducer: {
@@ -8,4 +8,5 @@ const store = configureStore({
     label: labelSlice.reducer,
   },
 });
+
 export default store;

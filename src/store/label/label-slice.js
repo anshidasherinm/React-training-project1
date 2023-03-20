@@ -5,13 +5,12 @@ import {
   deleteLabel,
   getLabelList,
   updateLabel,
-} from "./label-thunk";
+} from "store/label/label-thunk";
 
 const labelSlice = createSlice({
   name: "label",
   initialState: {
     labels: [],
-    groupLabels: [],
     addingLabel: false,
     addingLabelError: false,
     loadingLabels: false,
@@ -34,6 +33,7 @@ const labelSlice = createSlice({
         ...state.labels,
         { key: action.payload.name, ...action.meta.arg },
       ];
+      console.log({ key: action.payload.name, ...action.meta.arg });
     });
     builder.addCase(addLabel.rejected, (state) => {
       state.addingLabel = false;
@@ -52,13 +52,14 @@ const labelSlice = createSlice({
       }
       state.loadingLabels = false;
       state.labels = [...labelItems];
+      console.log(state.labels);
     });
     builder.addCase(getLabelList.rejected, (state) => {
       state.loadingLabels = false;
       state.loadingLabelError = true;
     });
 
-    // Update todo Item
+    // Update label item
     builder.addCase(updateLabel.pending, (state) => {
       state.updatingLabel = true;
       state.updatingLabelError = false;
@@ -79,7 +80,7 @@ const labelSlice = createSlice({
       state.updatingLabelError = true;
     });
 
-    //Delete todo Item
+    //Delete label item
     builder.addCase(deleteLabel.pending, (state) => {
       state.deletingLabel = true;
       state.deletingLabelError = false;
@@ -99,3 +100,4 @@ const labelSlice = createSlice({
 
 export const labelActions = labelSlice.actions;
 export default labelSlice;
+export const labelReducer = labelSlice.reducer;
